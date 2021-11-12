@@ -22,7 +22,7 @@ function App() {
         };
         getTodos();
     }, []);
-    const onHandleAdd = async (todo: TypeTodo) => {
+    const onHandleAddTodo = async (todo: TypeTodo) => {
         try {
             await TodosAPI.add(todo);
             setTodos([...todos, todo]);
@@ -30,7 +30,7 @@ function App() {
             console.log(error);
         }
     };
-    const onHandleDelete = async (id: number) => {
+    const onHandleDeleteTodo = async (id: number) => {
         try {
             await TodosAPI.remove(id);
             const newTodo = todos.filter((todo) => todo.id !== id);
@@ -76,7 +76,7 @@ function App() {
             </div>
             <ListTodo
                 todoList={todos}
-                onDeleteTodo={onHandleDelete}
+                onDeleteTodo={onHandleDeleteTodo}
                 editTodo={handleEditTodo}
             />
             <Modal
@@ -86,7 +86,7 @@ function App() {
                 onCancel={handleCancel}
             >
                 <AddTodoForm
-                    onAddTodo={onHandleAdd}
+                    onAddTodo={onHandleAddTodo}
                     currentTodo={currentTodo}
                     onEditTodo={handleUpdateTodo}
                     close={handleCancel}
